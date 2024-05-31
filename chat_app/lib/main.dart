@@ -1,12 +1,15 @@
-import 'package:chat_app/presentation/screens/home.dart';
+import 'package:chat_app/app_router.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( MyApp(
+    appRouter: AppRouter(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final AppRouter appRouter;
+  const MyApp({super.key, required this.appRouter});
 
   // This widget is the root of your application.
   @override
@@ -33,7 +36,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  Home(),
+      onGenerateRoute: appRouter.generateRoute,
+      initialRoute: "signin",
     );
   }
 }
