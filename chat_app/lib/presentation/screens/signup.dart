@@ -1,3 +1,4 @@
+import 'package:chat_app/constant.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -88,8 +89,9 @@ class _SignUpState extends State<SignUp> {
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                border: Border.all(width: 1.0),
-                                color: Colors.black38,
+                                border: Border.all(
+                                    width: 1.0, color: Colors.black38),
+                                borderRadius: BorderRadius.circular(10),
                               ),
                               child: const TextField(
                                 decoration: InputDecoration(
@@ -117,8 +119,9 @@ class _SignUpState extends State<SignUp> {
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                border: Border.all(width: 1.0),
-                                color: Colors.black38,
+                                border: Border.all(
+                                    width: 1.0, color: Colors.black38),
+                                borderRadius: BorderRadius.circular(10),
                               ),
                               child: const TextField(
                                 decoration: InputDecoration(
@@ -146,8 +149,9 @@ class _SignUpState extends State<SignUp> {
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                border: Border.all(width: 1.0),
-                                color: Colors.black38,
+                                border: Border.all(
+                                    width: 1.0, color: Colors.black38),
+                                borderRadius: BorderRadius.circular(10),
                               ),
                               child: const TextField(
                                 decoration: InputDecoration(
@@ -176,8 +180,9 @@ class _SignUpState extends State<SignUp> {
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                border: Border.all(width: 1.0),
-                                color: Colors.black38,
+                                border: Border.all(
+                                    width: 1.0, color: Colors.black38),
+                                borderRadius: BorderRadius.circular(10),
                               ),
                               child: const TextField(
                                 decoration: InputDecoration(
@@ -193,25 +198,32 @@ class _SignUpState extends State<SignUp> {
                             const SizedBox(
                               height: 30,
                             ),
-                            const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Don't have an account?",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16.0,
+                            Center(
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(context, signinScreen);
+                                },
+                                child: Container(
+                                  width: 200,
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: const Color(0xff7f30fe),
+                                          width: 2),
+                                      // color: const ,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: const Center(
+                                    child: Text(
+                                      "Sign Up",
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                        color: Color(0xff7f30fe),
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                                Text(
-                                  " Sign Up Now",
-                                  style: TextStyle(
-                                    color: Color(0xFF7f30fe),
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
                           ],
                         ),
@@ -219,43 +231,34 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   Center(
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 20.0,
-                      ),
-                      width: MediaQuery.of(context).size.width,
-                      child: Material(
-                        elevation: 5.0,
-                        borderRadius: BorderRadius.circular(
-                          10,
+                    child: Column(
+                      children: [
+                        const Text(
+                          "I already have acount.",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                        child: Container(
-                          padding: const EdgeInsets.all(
-                            10,
-                          ),
-                          decoration: BoxDecoration(
-                            color: const Color(
-                              0xFF6380fb,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              'SIGNUP',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                              ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text(
+                            "Sign In",
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              color: Color(0xff7f30fe),
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                  ),
+                  )
                 ],
               ),
             ),

@@ -72,8 +72,10 @@ class _SignInState extends State<SignIn> {
                             const SizedBox(height: 10.0),
                             Container(
                               decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 1.0, color: Colors.black38)),
+                                border: Border.all(
+                                    width: 1.0, color: Colors.black38),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                               child: const TextField(
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -94,8 +96,10 @@ class _SignInState extends State<SignIn> {
                             const SizedBox(height: 10.0),
                             Container(
                               decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 1.0, color: Colors.black38)),
+                                border: Border.all(
+                                    width: 1.0, color: Colors.black38),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                               child: const TextField(
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -156,11 +160,10 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                   Center(
-                      child: Center(
                     child: Column(
                       children: [
                         const Text(
-                          "I don't have acount ",
+                          "I don't have acount.",
                           style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.w500,
@@ -181,7 +184,7 @@ class _SignInState extends State<SignIn> {
                         ),
                       ],
                     ),
-                  ))
+                  )
                 ],
               ),
             )
