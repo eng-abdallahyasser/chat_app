@@ -11,7 +11,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SingleChildScrollView(
         child: Stack(
           children: [
             Container(
@@ -64,26 +64,14 @@ class _SignUpState extends State<SignUp> {
                     height: 20,
                   ),
                   Container(
-                    margin: const EdgeInsets.symmetric(
-                      vertical: 20.0,
-                      horizontal: 20.0,
-                    ),
+                    margin: const EdgeInsets.all(20),
                     child: Material(
                       elevation: 5.0,
                       borderRadius: BorderRadius.circular(
                         10,
                       ),
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(
-                          vertical: 30.0,
-                          horizontal: 20.0,
-                        ),
-                        height: MediaQuery.of(context).size.height / 1.7,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

@@ -1,4 +1,5 @@
 import 'package:chat_app/app_router.dart';
+import 'package:chat_app/constant.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       onGenerateRoute: appRouter.generateRoute,
-      initialRoute: "signin",
+      initialRoute: signinScreen,
     );
   }
 }

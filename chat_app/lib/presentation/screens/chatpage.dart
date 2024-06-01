@@ -11,45 +11,26 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF553370),
-      body: Container(
-        margin: const EdgeInsets.only(
-          top: 60,
+      appBar: AppBar(
+        title: const Text(
+          'Hossam Elyamany',
+          style: TextStyle(
+            color: Color(0xffc199cd),
+            fontSize: 20.0,
+            fontWeight: FontWeight.w500,
+          ),
         ),
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(10.0),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.arrow_back_ios_new_outlined,
-                    color: Color(0xffc199cd),
-                  ),
-                  SizedBox(
-                    width: 90,
-                  ),
-                  Text(
-                    'Hossam Elyamany',
-                    style: TextStyle(
-                      color: Color(0xffc199cd),
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Container(
-              padding: const EdgeInsets.only(
-                left: 20.0,
-                right: 20.0,
-                top: 50.0,
-                bottom: 40,
-              ),
+        backgroundColor: const Color(0xFF553370),
+        iconTheme: const IconThemeData(
+          color: Color(0xffc199cd), //change your color here
+        ),
+      ),
+      backgroundColor: const Color(0xFF553370),
+      body: Column(
+        children: [
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(20),
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height / 1.20,
               decoration: const BoxDecoration(
@@ -122,7 +103,7 @@ class _ChatPageState extends State<ChatPage> {
                           30,
                         ),
                       ),
-                      child:  Row(
+                      child: Row(
                         children: [
                           const Expanded(
                             child: TextField(
@@ -134,7 +115,6 @@ class _ChatPageState extends State<ChatPage> {
                             ),
                           ),
                           Container(
-                            
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               color: const Color(0XFFf3f3f3),
@@ -154,8 +134,8 @@ class _ChatPageState extends State<ChatPage> {
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

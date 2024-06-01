@@ -1,3 +1,4 @@
+import 'package:chat_app/constant.dart';
 import 'package:chat_app/presentation/screens/chatpage.dart';
 import 'package:chat_app/presentation/screens/home.dart';
 import 'package:chat_app/presentation/screens/signin.dart';
@@ -7,13 +8,13 @@ import 'package:flutter/material.dart';
 class AppRouter {
   Route generateRoute(RouteSettings route) {
     switch (route.name) {
-      case '/':
+      case homeScreen:
         return MaterialPageRoute(builder: (context) => const Home());
-      case '/signin':
+      case signinScreen:
         return MaterialPageRoute(builder: (context) => const SignIn());
-      case '/signup':
+      case signupScreen:
         return MaterialPageRoute(builder: (context) => const SignUp());
-      case '/chat_page':
+      case chatScreen:
         return MaterialPageRoute(builder: (context) => const ChatPage());
       default:
         return MaterialPageRoute(
