@@ -18,8 +18,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (context) => const ChatPage());
       default:
         return MaterialPageRoute(
-            builder: (context) =>
-                const Scaffold(body: Center(child: Text('Route not found'))));
+            builder: (context) => const SignIn());
     }
   }
 }

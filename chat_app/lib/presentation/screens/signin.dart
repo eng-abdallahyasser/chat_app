@@ -1,4 +1,5 @@
 import 'package:chat_app/constant.dart';
+import 'package:chat_app/presentation/widgets/my_textfield.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
@@ -70,21 +71,7 @@ class _SignInState extends State<SignIn> {
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.w500)),
                             const SizedBox(height: 10.0),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1.0, color: Colors.black38),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const TextField(
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    prefixIcon: Icon(
-                                      Icons.mail_outline,
-                                      color: Color(0xff7f30fe),
-                                    )),
-                              ),
-                            ),
+                            const MyTextfield(),
                             const SizedBox(
                               height: 20,
                             ),
