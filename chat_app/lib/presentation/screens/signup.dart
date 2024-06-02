@@ -4,8 +4,13 @@ import 'package:chat_app/presentation/widgets/my_textfield.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatelessWidget {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _pwController = TextEditingController();
+  final TextEditingController _confirmPwController = TextEditingController();
+
   final void Function()? onTap;
-  const SignUp({super.key, this.onTap});
+  SignUp({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -77,19 +82,31 @@ class SignUp extends StatelessWidget {
                             const SizedBox(
                               height: 10,
                             ),
-                            const MyTextfield(hintText: 'Name'),
+                            MyTextfield(
+                              hintText: 'Name',
+                              controller: _nameController,
+                            ),
                             const SizedBox(
                               height: 20,
                             ),
-                            const MyTextfield(hintText: 'Email'),
+                            MyTextfield(
+                              hintText: 'Email',
+                              controller: _emailController,
+                            ),
                             const SizedBox(
                               height: 20,
                             ),
-                            const MyTextfield(hintText: 'Password'),
+                            MyTextfield(
+                              hintText: 'Password',
+                              controller: _pwController,
+                            ),
                             const SizedBox(
                               height: 20,
                             ),
-                            const MyTextfield(hintText: 'Confirm password'),
+                            MyTextfield(
+                              hintText: 'Confirm password',
+                              controller: _confirmPwController,
+                            ),
                             const SizedBox(
                               height: 30,
                             ),

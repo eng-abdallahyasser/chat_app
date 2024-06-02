@@ -4,8 +4,11 @@ import 'package:chat_app/presentation/widgets/my_textfield.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatelessWidget {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _pwController = TextEditingController();
+
   final void Function()? onTap;
-  const SignIn({super.key, this.onTap});
+  SignIn({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -63,14 +66,16 @@ class SignIn extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 10.0),
-                            const MyTextfield(
+                            MyTextfield(
+                              controller: _emailController,
                               hintText: "Email",
                             ),
                             const SizedBox(
                               height: 20,
                             ),
                             const SizedBox(height: 10.0),
-                            const MyTextfield(
+                            MyTextfield(
+                              controller: _pwController,
                               hintText: "Password",
                             ),
                             const SizedBox(
