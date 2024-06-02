@@ -1,15 +1,12 @@
 import 'package:chat_app/constant.dart';
+import 'package:chat_app/presentation/widgets/my_button.dart';
 import 'package:chat_app/presentation/widgets/my_textfield.dart';
 import 'package:flutter/material.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({super.key});
+class SignIn extends StatelessWidget {
+  final void Function()? onTap;
+  const SignIn({super.key, this.onTap});
 
-  @override
-  State<SignIn> createState() => _SignInState();
-}
-
-class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,37 +62,16 @@ class _SignInState extends State<SignIn> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text("Email",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.w500)),
                             const SizedBox(height: 10.0),
-                            const MyTextfield(),
+                            const MyTextfield(
+                              hintText: "Email",
+                            ),
                             const SizedBox(
                               height: 20,
                             ),
-                            const Text("Password",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.w500)),
                             const SizedBox(height: 10.0),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1.0, color: Colors.black38),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const TextField(
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    prefixIcon: Icon(
-                                      Icons.remove_red_eye_outlined,
-                                      color: Color(0xff7f30fe),
-                                    )),
-                                obscureText: true,
-                              ),
+                            const MyTextfield(
+                              hintText: "Password",
                             ),
                             const SizedBox(
                               height: 10,
@@ -116,26 +92,7 @@ class _SignInState extends State<SignIn> {
                                 onTap: () {
                                   Navigator.pushNamed(context, homeScreen);
                                 },
-                                child: Container(
-                                  width: 200,
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: const Color(0xff7f30fe),
-                                          width: 2),
-                                      // color: const ,
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: const Center(
-                                    child: Text(
-                                      "Sign In",
-                                      style: TextStyle(
-                                        fontSize: 20.0,
-                                        color: Color(0xff7f30fe),
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                child: const MyButton(text: "Sign In"),
                               ),
                             ),
                             const SizedBox(
@@ -153,15 +110,13 @@ class _SignInState extends State<SignIn> {
                           "I don't have acount.",
                           style: TextStyle(
                             fontSize: 20.0,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, signupScreen);
-                          },
+                          onTap: onTap,
                           child: const Text(
-                            "Sign Up",
+                            "Sign Up, Now",
                             style: TextStyle(
                               fontSize: 20.0,
                               color: Color(0xff7f30fe),

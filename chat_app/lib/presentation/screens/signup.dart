@@ -1,14 +1,12 @@
 import 'package:chat_app/constant.dart';
+import 'package:chat_app/presentation/widgets/my_button.dart';
+import 'package:chat_app/presentation/widgets/my_textfield.dart';
 import 'package:flutter/material.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+class SignUp extends StatelessWidget {
+  final void Function()? onTap;
+  const SignUp({super.key, this.onTap});
 
-  @override
-  State<SignUp> createState() => _SignUpState();
-}
-
-class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,125 +74,22 @@ class _SignUpState extends State<SignUp> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'Name',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
                             const SizedBox(
                               height: 10,
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1.0, color: Colors.black38),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const TextField(
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  prefixIcon: Icon(
-                                    Icons.mail_outline,
-                                    color: Color(0xFF7f30fe),
-                                  ),
-                                ),
-                              ),
-                            ),
+                            const MyTextfield(hintText: 'Name'),
                             const SizedBox(
                               height: 20,
                             ),
-                            const Text(
-                              'Email',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1.0, color: Colors.black38),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const TextField(
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  prefixIcon: Icon(
-                                    Icons.mail_outline,
-                                    color: Color(0xFF7f30fe),
-                                  ),
-                                ),
-                              ),
-                            ),
+                            const MyTextfield(hintText: 'Email'),
                             const SizedBox(
                               height: 20,
                             ),
-                            const Text(
-                              'Password',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1.0, color: Colors.black38),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const TextField(
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  prefixIcon: Icon(
-                                    Icons.password,
-                                    color: Color(0xFF7f30fe),
-                                  ),
-                                ),
-                                obscureText: true,
-                              ),
-                            ),
+                            const MyTextfield(hintText: 'Password'),
                             const SizedBox(
                               height: 20,
                             ),
-                            const Text(
-                              'Confirm password',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1.0, color: Colors.black38),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const TextField(
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  prefixIcon: Icon(
-                                    Icons.password,
-                                    color: Color(0xFF7f30fe),
-                                  ),
-                                ),
-                                obscureText: true,
-                              ),
-                            ),
+                            const MyTextfield(hintText: 'Confirm password'),
                             const SizedBox(
                               height: 30,
                             ),
@@ -203,25 +98,8 @@ class _SignUpState extends State<SignUp> {
                                 onTap: () {
                                   Navigator.pushNamed(context, signinScreen);
                                 },
-                                child: Container(
-                                  width: 200,
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: const Color(0xff7f30fe),
-                                          width: 2),
-                                      // color: const ,
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: const Center(
-                                    child: Text(
-                                      "Sign Up",
-                                      style: TextStyle(
-                                        fontSize: 20.0,
-                                        color: Color(0xff7f30fe),
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
+                                child: const MyButton(
+                                  text: "Sign Up",
                                 ),
                               ),
                             ),
@@ -240,15 +118,13 @@ class _SignUpState extends State<SignUp> {
                           "I already have acount.",
                           style: TextStyle(
                             fontSize: 20.0,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
+                          onTap: onTap,
                           child: const Text(
-                            "Sign In",
+                            "Sign In, Now",
                             style: TextStyle(
                               fontSize: 20.0,
                               color: Color(0xff7f30fe),
