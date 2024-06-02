@@ -112,21 +112,22 @@ class SignUp extends StatelessWidget {
                     height: 20,
                   ),
                   Center(
-                    child: Column(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          "I already have acount.",
+                          "I already have acount, ",
                           style: TextStyle(
-                            fontSize: 20.0,
+                            fontSize: 18.0,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                         GestureDetector(
                           onTap: onTap,
                           child: const Text(
-                            "Sign In, Now",
+                            "Sign In Now",
                             style: TextStyle(
-                              fontSize: 20.0,
+                              fontSize: 18.0,
                               color: Color(0xff7f30fe),
                               fontWeight: FontWeight.w500,
                             ),

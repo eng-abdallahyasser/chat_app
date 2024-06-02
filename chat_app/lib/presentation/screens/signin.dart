@@ -76,16 +76,23 @@ class SignIn extends StatelessWidget {
                             const SizedBox(
                               height: 10,
                             ),
-                            Container(
-                              alignment: Alignment.topCenter,
-                              child: const Text("Forgetten Password",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w500)),
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("I forgetten my password, ",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.w400)),
+                                Text("Reset it.",
+                                    style: TextStyle(
+                                        color: Color(0xff7f30fe),
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.w500)),
+                              ],
                             ),
                             const SizedBox(
-                              height: 20,
+                              height: 40,
                             ),
                             Center(
                               child: GestureDetector(
@@ -96,7 +103,7 @@ class SignIn extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(
-                              height: 30,
+                              height: 20,
                             ),
                           ],
                         ),
@@ -104,21 +111,22 @@ class SignIn extends StatelessWidget {
                     ),
                   ),
                   Center(
-                    child: Column(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          "I don't have acount.",
+                          "I don't have acount, ",
                           style: TextStyle(
-                            fontSize: 20.0,
+                            fontSize: 18.0,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                         GestureDetector(
                           onTap: onTap,
                           child: const Text(
-                            "Sign Up, Now",
+                            "Sign Up Now",
                             style: TextStyle(
-                              fontSize: 20.0,
+                              fontSize: 18.0,
                               color: Color(0xff7f30fe),
                               fontWeight: FontWeight.w500,
                             ),
