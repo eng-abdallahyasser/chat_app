@@ -1,5 +1,7 @@
 import 'package:chat_app/auth/auth_service.dart';
 import 'package:chat_app/constant.dart';
+import 'package:chat_app/presentation/widgets/my_drawer.dart';
+import 'package:chat_app/presentation/widgets/my_icon.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -19,7 +21,9 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        iconTheme: const IconThemeData(
+          color: Color(0xffc199cd), //change your color here
+        ),
         backgroundColor: const Color(0xFF553370),
         title: Row(
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,51 +38,16 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
-            Container(
-              padding: const EdgeInsets.all(
-                8,
-              ),
-              decoration: BoxDecoration(
-                color: const Color(
-                  0xFF3a2144,
-                ),
-                borderRadius: BorderRadius.circular(
-                  10,
-                ),
-              ),
-              child: const Icon(
-                Icons.search,
-                color: Color(
-                  0xffc199cd,
-                ),
-              ),
-            ),
+            const MyIcon(icon: Icons.search),
             IconButton(
               onPressed: logout,
-              icon: Container(
-                padding: const EdgeInsets.all(
-                  8,
-                ),
-                decoration: BoxDecoration(
-                  color: const Color(
-                    0xFF3a2144,
-                  ),
-                  borderRadius: BorderRadius.circular(
-                    10,
-                  ),
-                ),
-                child: const Icon(
-                  Icons.logout,
-                  color: Color(
-                    0xffc199cd,
-                  ),
-                ),
-              ),
+              icon: const MyIcon(icon: Icons.logout),
             ),
           ],
         ),
       ),
       backgroundColor: const Color(0xFF553370),
+      drawer: const MyDrawer(),
       body: Expanded(
         child: Container(
           padding: const EdgeInsets.symmetric(
