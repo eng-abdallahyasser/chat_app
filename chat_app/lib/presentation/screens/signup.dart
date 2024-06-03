@@ -1,3 +1,4 @@
+import 'package:chat_app/auth/auth_service.dart';
 import 'package:chat_app/constant.dart';
 import 'package:chat_app/presentation/widgets/my_button.dart';
 import 'package:chat_app/presentation/widgets/my_textfield.dart';
@@ -11,6 +12,40 @@ class SignUp extends StatelessWidget {
 
   final void Function()? onTap;
   SignUp({super.key, this.onTap});
+
+  void signUp( BuildContext context) {
+    if (_nameController.text.isNotEmpty &&
+        _emailController.text.isNotEmpty &&
+        _pwController.text.isNotEmpty &&
+        _confirmPwController.text.isNotEmpty) {
+      if (_pwController.text == _confirmPwController.text) {
+        final auth = AuthService();
+        try {
+          auth.signUpByEmailPassword(_emailController.text, _pwController.text);
+        } catch (e) {
+          showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                    title: Text(e.toString()),
+                  ));
+        }
+      }else{
+        showDialog(
+              context: context,
+              builder: (context) => const AlertDialog(
+                    title: Text("Passwords don't match!"),
+                  ));
+
+      }
+    }else{
+        showDialog(
+              context: context,
+              builder: (context) => const AlertDialog(
+                    title: Text("You have to input all fields"),
+                  ));
+
+      }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,9 +147,7 @@ class SignUp extends StatelessWidget {
                             ),
                             Center(
                               child: GestureDetector(
-                                onTap: () {
-                                  Navigator.pushNamed(context, signinScreen);
-                                },
+                                onTap: () => signUp(context),
                                 child: const MyButton(
                                   text: "Sign Up",
                                 ),

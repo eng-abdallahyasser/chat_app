@@ -1,4 +1,4 @@
-import 'package:chat_app/constant.dart';
+import 'package:chat_app/auth/auth_service.dart';
 import 'package:chat_app/presentation/widgets/my_button.dart';
 import 'package:chat_app/presentation/widgets/my_textfield.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +9,16 @@ class SignIn extends StatelessWidget {
 
   final void Function()? onTap;
   SignIn({super.key, this.onTap});
+
+  void signIn() async {
+    final authService = AuthService();
+    try {
+      await authService.signInByEmailPassword(
+          _emailController.text, _pwController.text);
+    } catch (e) {
+      print("2312 $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,9 +111,7 @@ class SignIn extends StatelessWidget {
                             ),
                             Center(
                               child: GestureDetector(
-                                onTap: () {
-                                  Navigator.pushNamed(context, homeScreen);
-                                },
+                                onTap: signIn,
                                 child: const MyButton(text: "Sign In"),
                               ),
                             ),

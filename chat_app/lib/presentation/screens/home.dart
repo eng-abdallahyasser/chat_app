@@ -1,3 +1,4 @@
+import 'package:chat_app/auth/auth_service.dart';
 import 'package:chat_app/constant.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  void logout() {
+    final authService = AuthService();
+    authService.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,32 +22,56 @@ class _HomeState extends State<Home> {
         automaticallyImplyLeading: false,
         backgroundColor: const Color(0xFF553370),
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              'ChatApp',
-              style: TextStyle(
-                color: Color(0xffc199cd),
-                fontSize: 22.0,
-                fontWeight: FontWeight.bold,
+            const Expanded(
+              child: Text(
+                'ChatApp',
+                style: TextStyle(
+                  color: Color(0xffc199cd),
+                  fontSize: 22.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             Container(
               padding: const EdgeInsets.all(
-                6,
+                8,
               ),
               decoration: BoxDecoration(
                 color: const Color(
                   0xFF3a2144,
                 ),
                 borderRadius: BorderRadius.circular(
-                  20,
+                  10,
                 ),
               ),
               child: const Icon(
                 Icons.search,
                 color: Color(
                   0xffc199cd,
+                ),
+              ),
+            ),
+            IconButton(
+              onPressed: logout,
+              icon: Container(
+                padding: const EdgeInsets.all(
+                  8,
+                ),
+                decoration: BoxDecoration(
+                  color: const Color(
+                    0xFF3a2144,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    10,
+                  ),
+                ),
+                child: const Icon(
+                  Icons.logout,
+                  color: Color(
+                    0xffc199cd,
+                  ),
                 ),
               ),
             ),
