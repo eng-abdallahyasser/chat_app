@@ -1,21 +1,13 @@
-import 'package:chat_app/auth/auth_service.dart';
-import 'package:chat_app/constant.dart';
+import 'package:chat_app/presentation/screens/chatpage.dart';
 import 'package:chat_app/presentation/widgets/my_drawer.dart';
 import 'package:chat_app/presentation/widgets/my_icon.dart';
+import 'package:chat_app/presentation/widgets/user_tile.dart';
+import 'package:chat_app/services/chat/chat_service.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  void logout() {
-    final authService = AuthService();
-    authService.signOut();
-  }
+class Home extends StatelessWidget {
+  final ChatService chatService = ChatService();
+  Home({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +17,10 @@ class _HomeState extends State<Home> {
           color: Color(0xffc199cd), //change your color here
         ),
         backgroundColor: const Color(0xFF553370),
-        title: Row(
+        title: const Row(
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Expanded(
+            Expanded(
               child: Text(
                 'ChatApp',
                 style: TextStyle(
@@ -38,11 +30,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
-            const MyIcon(icon: Icons.search),
-            IconButton(
-              onPressed: logout,
-              icon: const MyIcon(icon: Icons.logout),
-            ),
+            MyIcon(icon: Icons.search),
           ],
         ),
       ),
@@ -50,85 +38,45 @@ class _HomeState extends State<Home> {
       drawer: const MyDrawer(),
       body: Expanded(
         child: Container(
-          padding: const EdgeInsets.symmetric(
-            // vertical: 30,
-            horizontal: 20,
-          ),
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
+            padding: const EdgeInsets.symmetric(
+              // vertical: 30,
+              horizontal: 20,
             ),
-          ),
-          child: ListView(
-            children: [
-              for (int i = 0; i < 16; i++)
-                Column(children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, chatScreen);
-                    },
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(60),
-                          child: Image.asset(
-                            "assets/images/boy${i % 3}.jpg",
-                            height: 70,
-                            width: 70,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 10,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+            ),
+            child: StreamBuilder(
+                stream: chatService.getUserStream(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return const Text("Error");
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  } else {
+                    return ListView(
+                      children: snapshot.data!
+                          .map(
+                            (userdata) => GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context)=>ChatPage(name: userdata["name"])),
+                                );
+                              },
+                              child: UserTile(user: userdata),
                             ),
-                            Text(
-                              'Hossam Elyamany',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 17.0,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Text(
-                              'Hello, What are you doing?',
-                              style: TextStyle(
-                                color: Colors.black45,
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
-                        const Text(
-                          '04:30 PM',
-                          style: TextStyle(
-                            color: Colors.black45,
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                ]),
-            ],
-          ),
-        ),
+                          )
+                          .toList(),
+                    );
+                  }
+                })),
       ),
     );
   }

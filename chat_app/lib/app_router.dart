@@ -8,11 +8,11 @@ class AppRouter {
   Route generateRoute(RouteSettings route) {
     switch (route.name) {
       case homeScreen:
-        return MaterialPageRoute(builder: (context) => const Home());
+        return MaterialPageRoute(builder: (context) => Home());
       case signinOrSignupScreen:
         return MaterialPageRoute(builder: (context) => const SigninOrSignup());
       case chatScreen:
-        return MaterialPageRoute(builder: (context) => const ChatPage());
+        return MaterialPageRoute(builder: (context) => const ChatPage(name: "place holder"));
       default:
         return MaterialPageRoute(
             builder: (context) => const SigninOrSignup());

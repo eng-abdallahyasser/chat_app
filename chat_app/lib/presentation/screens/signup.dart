@@ -1,4 +1,4 @@
-import 'package:chat_app/auth/auth_service.dart';
+import 'package:chat_app/services/auth/auth_service.dart';
 import 'package:chat_app/presentation/widgets/my_button.dart';
 import 'package:chat_app/presentation/widgets/my_textfield.dart';
 import 'package:flutter/material.dart';
@@ -8,19 +8,20 @@ class SignUp extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pwController = TextEditingController();
   final TextEditingController _confirmPwController = TextEditingController();
+  final auth = AuthService();
 
   final void Function()? onTap;
   SignUp({super.key, this.onTap});
 
-  void signUp( BuildContext context) {
+  void signUp(BuildContext context) {
     if (_nameController.text.isNotEmpty &&
         _emailController.text.isNotEmpty &&
         _pwController.text.isNotEmpty &&
         _confirmPwController.text.isNotEmpty) {
       if (_pwController.text == _confirmPwController.text) {
-        final auth = AuthService();
+        
         try {
-          auth.signUpByEmailPassword(_emailController.text, _pwController.text);
+          auth.signUpByEmailPassword(_nameController.text,_emailController.text, _pwController.text);
         } catch (e) {
           showDialog(
               context: context,
@@ -28,22 +29,20 @@ class SignUp extends StatelessWidget {
                     title: Text(e.toString()),
                   ));
         }
-      }else{
+      } else {
         showDialog(
-              context: context,
-              builder: (context) => const AlertDialog(
-                    title: Text("Passwords don't match!"),
-                  ));
-
+            context: context,
+            builder: (context) => const AlertDialog(
+                  title: Text("Passwords don't match!"),
+                ));
       }
-    }else{
-        showDialog(
-              context: context,
-              builder: (context) => const AlertDialog(
-                    title: Text("You have to input all fields"),
-                  ));
-
-      }
+    } else {
+      showDialog(
+          context: context,
+          builder: (context) => const AlertDialog(
+                title: Text("You have to input all fields"),
+              ));
+    }
   }
 
   @override
