@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class MyDrawer extends StatelessWidget {
-  const MyDrawer({super.key});
-
-    void logout() {
+  MyDrawer({super.key});
+  final authService = AuthService();
+  void logout() {
     final authService = AuthService();
     authService.signOut();
   }
@@ -21,9 +21,9 @@ class MyDrawer extends StatelessWidget {
               width: double.infinity,
               height: 40,
               alignment: Alignment.center,
-              child: const Text(
-                "My Chat App",
-                style: TextStyle(
+              child: Text(
+                authService.getCurrentUser()!.email!,
+                style: const TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.w900,
                     color: Color(0xFF553370)),

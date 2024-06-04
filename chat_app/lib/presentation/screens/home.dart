@@ -2,12 +2,33 @@ import 'package:chat_app/presentation/screens/chatpage.dart';
 import 'package:chat_app/presentation/widgets/my_drawer.dart';
 import 'package:chat_app/presentation/widgets/my_icon.dart';
 import 'package:chat_app/presentation/widgets/user_tile.dart';
+import 'package:chat_app/services/auth/auth_service.dart';
 import 'package:chat_app/services/chat/chat_service.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
   final ChatService chatService = ChatService();
+  final AuthService authService = AuthService();
+
   Home({super.key});
+
+
+  Widget _buildUserItem(Map<String, dynamic> user, BuildContext context) {
+    if (user['email'] != authService.getCurrentUser()!.email) {
+      return GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ChatPage(name: user['name'],receiverId: user['uid'],)),
+          );
+        },
+        child: UserTile(user: user),
+      );
+    } else {
+      return Container();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +38,10 @@ class Home extends StatelessWidget {
           color: Color(0xffc199cd), //change your color here
         ),
         backgroundColor: const Color(0xFF553370),
-        title: const Row(
+        title: Row(
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(
+            const Expanded(
               child: Text(
                 'ChatApp',
                 style: TextStyle(
@@ -30,18 +51,19 @@ class Home extends StatelessWidget {
                 ),
               ),
             ),
-            MyIcon(icon: Icons.search),
+            GestureDetector(
+              onTap: () {
+                // print(chatService.getUserStream().first);
+              },
+              child: const MyIcon(icon: Icons.search),
+            ),
           ],
         ),
       ),
       backgroundColor: const Color(0xFF553370),
-      drawer: const MyDrawer(),
+      drawer: MyDrawer(),
       body: Expanded(
         child: Container(
-            padding: const EdgeInsets.symmetric(
-              // vertical: 30,
-              horizontal: 20,
-            ),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             decoration: const BoxDecoration(
@@ -52,30 +74,20 @@ class Home extends StatelessWidget {
               ),
             ),
             child: StreamBuilder(
-                stream: chatService.getUserStream(),
+                stream: chatService.getUsersStream(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     return const Text("Error");
-                  } else if (snapshot.connectionState ==
-                      ConnectionState.waiting) {
-                    return const CircularProgressIndicator();
-                  } else {
-                    return ListView(
-                      children: snapshot.data!
-                          .map(
-                            (userdata) => GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context)=>ChatPage(name: userdata["name"])),
-                                );
-                              },
-                              child: UserTile(user: userdata),
-                            ),
-                          )
-                          .toList(),
-                    );
                   }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Text("loading");
+                  }
+                  return ListView(
+                    children: snapshot.data!
+                        .map<Widget>(
+                            (userdata) => _buildUserItem(userdata, context))
+                        .toList(),
+                  );
                 })),
       ),
     );

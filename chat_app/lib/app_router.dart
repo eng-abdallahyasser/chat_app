@@ -12,7 +12,7 @@ class AppRouter {
       case signinOrSignupScreen:
         return MaterialPageRoute(builder: (context) => const SigninOrSignup());
       case chatScreen:
-        return MaterialPageRoute(builder: (context) => const ChatPage(name: "place holder"));
+        return MaterialPageRoute(builder: (context) => ChatPage(name: "place holder" ,receiverId: "",));
       default:
         return MaterialPageRoute(
             builder: (context) => const SigninOrSignup());
