@@ -76,9 +76,7 @@ class ChatPage extends StatelessWidget {
                     child: _buildMessageListView(),
                   ),
                   Material(
-                    borderRadius: BorderRadius.circular(
-                      20,
-                    ),
+                    borderRadius: BorderRadius.circular(50),
                     elevation: 5.0,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -95,10 +93,9 @@ class ChatPage extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               color: const Color(0XFFf3f3f3),
-                              borderRadius: BorderRadius.circular(60),
+                              borderRadius: BorderRadius.circular(50),
                             ),
                             child: Center(
                               child: IconButton(
