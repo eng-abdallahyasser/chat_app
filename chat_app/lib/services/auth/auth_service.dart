@@ -23,6 +23,8 @@ class AuthService {
     try {
       UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: password);
+          
+      await userCredential.user?.updateDisplayName(name);
 
       _firebaseFirestore.collection("Users").doc(userCredential.user!.uid).set({
         "uid": userCredential.user!.uid,
@@ -30,6 +32,7 @@ class AuthService {
         "email": email,
         "password": password,
       });
+
       return userCredential;
     } on FirebaseAuthException catch (e) {
       throw Exception(e.code);

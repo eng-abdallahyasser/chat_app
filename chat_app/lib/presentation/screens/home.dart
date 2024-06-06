@@ -7,10 +7,13 @@ import 'package:chat_app/services/chat/chat_service.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
+
   final ChatService chatService = ChatService();
   final AuthService authService = AuthService();
 
   Home({super.key});
+
+
 
 
   Widget _buildUserItem(Map<String, dynamic> user, BuildContext context) {
@@ -80,7 +83,7 @@ class Home extends StatelessWidget {
                     return const Text("Error");
                   }
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Text("loading");
+                    return const Center(child:  CircularProgressIndicator());
                   }
                   return ListView(
                     children: snapshot.data!

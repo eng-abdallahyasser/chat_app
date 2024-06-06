@@ -1,8 +1,27 @@
+import 'package:chat_app/services/auth/auth_service.dart';
+import 'package:chat_app/services/chat/chat_service.dart';
 import 'package:flutter/material.dart';
 
 class UserTile extends StatelessWidget {
   final Map<String, dynamic> user;
-  const UserTile({super.key, required this.user});
+  final AuthService authService = AuthService();
+  final ChatService chatService = ChatService();
+
+  UserTile({super.key, required this.user});
+
+  Widget _getLastmsg() {
+    return FutureBuilder(
+      future: chatService.getLastMessage(
+          authService.getCurrentUser()!.uid, user['uid']),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        return Text(snapshot.data.toString());
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -13,7 +32,7 @@ class UserTile extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(60),
             child: Image.asset(
-              "assets/images/boy0.jpg",
+              "assets/images/placeholder.jpg",
               height: 70,
               width: 70,
               fit: BoxFit.cover,
@@ -25,6 +44,7 @@ class UserTile extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              _getLastmsg(),
               const SizedBox(
                 height: 10,
               ),
