@@ -18,7 +18,7 @@ class ChatService {
     final String senderId = _auth.getCurrentUser()!.uid;
     final String senderName = _auth.getCurrentUser()!.displayName!;
     final Timestamp timestamp = Timestamp.now();
-    
+
     Message newMessage = Message(
       senderName: senderName,
       receiverId: receiverId,
@@ -61,7 +61,7 @@ class ChatService {
   //       .orderBy("timestamp", descending: false);
   // }
 
-  Future<String> getLastMessage(String senderId, String receiverId) async {
+  Future<Map<String,dynamic>> getLastMessage(String senderId, String receiverId) async {
     // Ensure ids are in alphabetical order to form a consistent chat room ID
     List<String> ids = [receiverId, senderId];
     ids.sort();
@@ -79,10 +79,9 @@ class ChatService {
     // Check if there's any message and return the last message
     if (querySnapshot.docs.isNotEmpty) {
       var lastMessageDoc = querySnapshot.docs.first;
-      return lastMessageDoc
-          .data()['message']; // Assuming 'message' is the field name
+      return lastMessageDoc.data(); 
     } else {
-      return 'No messages found';
+      return {'message' :'No messages yet'};
     }
   }
 }

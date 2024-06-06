@@ -29,7 +29,7 @@ class ChatPage extends StatelessWidget {
             return const Text("Error");
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child:  CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           return ListView(
             children: snapshot.data!.docs
@@ -61,6 +61,14 @@ class ChatPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
+                messageMap["senderName"],
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+              Text(
                 messageMap["message"],
                 style: const TextStyle(
                   color: Colors.black,
@@ -69,7 +77,7 @@ class ChatPage extends StatelessWidget {
                 ),
               ),
               Text(
-                DateFormat('MM/dd/yyyy, hh:mm a')
+                DateFormat('yyyy   MM/dd   hh:mm a')
                     .format((messageMap["timestamp"] as Timestamp).toDate()),
                 style: const TextStyle(
                   color: Colors.black,
