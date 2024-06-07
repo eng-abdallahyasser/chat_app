@@ -64,6 +64,8 @@ class UserTile extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
+            if((snapshot.data
+                      as Map<String, dynamic>)['timestamp']!=null)
             Text(
               DateFormat('hh:mm a').format(((snapshot.data
                       as Map<String, dynamic>)['timestamp'] as Timestamp)
@@ -74,6 +76,8 @@ class UserTile extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
+            if((snapshot.data
+                      as Map<String, dynamic>)['timestamp']!=null)
             Text(
               DateFormat('yyyy  MM/dd').format(((snapshot.data
                       as Map<String, dynamic>)['timestamp'] as Timestamp)

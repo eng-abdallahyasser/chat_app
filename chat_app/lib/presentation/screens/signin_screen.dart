@@ -3,12 +3,12 @@ import 'package:chat_app/presentation/widgets/my_button.dart';
 import 'package:chat_app/presentation/widgets/my_textfield.dart';
 import 'package:flutter/material.dart';
 
-class SignIn extends StatelessWidget {
+class SignInScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pwController = TextEditingController();
 
   final void Function()? onTap;
-  SignIn({super.key, this.onTap});
+  SignInScreen({super.key, this.onTap});
 
   void signIn() async {
     final authService = AuthService();

@@ -4,14 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class ChatPage extends StatelessWidget {
+class ChatScreen extends StatelessWidget {
   final String name;
   final String receiverId;
   final TextEditingController _messageController = TextEditingController();
   final ChatService _chatService = ChatService();
   final AuthService _authService = AuthService();
 
-  ChatPage({super.key, required this.name, required this.receiverId});
+  ChatScreen({super.key, required this.name, required this.receiverId});
 
   void sendMessage() async {
     if (_messageController.text.isNotEmpty) {
@@ -61,14 +61,6 @@ class ChatPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                messageMap["senderName"],
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-              Text(
                 messageMap["message"],
                 style: const TextStyle(
                   color: Colors.black,
@@ -76,14 +68,28 @@ class ChatPage extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              Text(
-                DateFormat('yyyy   MM/dd   hh:mm a')
-                    .format((messageMap["timestamp"] as Timestamp).toDate()),
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 10,
-                  fontWeight: FontWeight.w500,
-                ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      messageMap["senderName"],
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    DateFormat('yyyy   MM/dd   hh:mm a').format(
+                        (messageMap["timestamp"] as Timestamp).toDate()),
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -108,24 +114,38 @@ class ChatPage extends StatelessWidget {
             children: [
               Expanded(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
                       messageMap["message"],
                       style: const TextStyle(
                         color: Colors.black,
-                        fontSize: 18.0,
+                        fontSize: 18,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    Text(
-                      DateFormat('MM/dd/yyyy, hh:mm a').format(
-                          (messageMap["timestamp"] as Timestamp).toDate()),
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 10.0,
-                        fontWeight: FontWeight.w500,
-                      ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            messageMap["senderName"],
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          DateFormat('yyyy   MM/dd   hh:mm a').format(
+                              (messageMap["timestamp"] as Timestamp).toDate()),
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

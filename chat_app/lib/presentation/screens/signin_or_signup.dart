@@ -1,5 +1,5 @@
-import 'package:chat_app/presentation/screens/signin.dart';
-import 'package:chat_app/presentation/screens/signup.dart';
+import 'package:chat_app/presentation/screens/signin_screen.dart';
+import 'package:chat_app/presentation/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 class SigninOrSignup extends StatefulWidget {
@@ -21,11 +21,11 @@ class _SigninOrSignupState extends State<SigninOrSignup> {
   @override
   Widget build(BuildContext context) {
     if (signInPage) {
-      return SignIn(
+      return SignInScreen(
         onTap: togglePages,
       );
     } else {
-      return SignUp(
+      return SignUpScreen(
         onTap: togglePages,
       );
     }

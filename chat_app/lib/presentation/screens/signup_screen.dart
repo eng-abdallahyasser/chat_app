@@ -3,7 +3,7 @@ import 'package:chat_app/presentation/widgets/my_button.dart';
 import 'package:chat_app/presentation/widgets/my_textfield.dart';
 import 'package:flutter/material.dart';
 
-class SignUp extends StatelessWidget {
+class SignUpScreen extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pwController = TextEditingController();
@@ -11,7 +11,7 @@ class SignUp extends StatelessWidget {
   final auth = AuthService();
 
   final void Function()? onTap;
-  SignUp({super.key, this.onTap});
+  SignUpScreen({super.key, this.onTap});
 
   void signUp(BuildContext context) {
     if (_nameController.text.isNotEmpty &&
@@ -19,9 +19,9 @@ class SignUp extends StatelessWidget {
         _pwController.text.isNotEmpty &&
         _confirmPwController.text.isNotEmpty) {
       if (_pwController.text == _confirmPwController.text) {
-        
         try {
-          auth.signUpByEmailPassword(_nameController.text,_emailController.text, _pwController.text);
+          auth.signUpByEmailPassword(
+              _nameController.text, _emailController.text, _pwController.text);
         } catch (e) {
           showDialog(
               context: context,
