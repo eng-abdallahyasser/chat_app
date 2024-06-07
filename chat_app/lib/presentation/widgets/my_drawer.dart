@@ -1,38 +1,54 @@
+import 'package:chat_app/presentation/screens/profile_screen.dart';
 import 'package:chat_app/services/auth/auth_service.dart';
 import 'package:chat_app/presentation/widgets/my_icon.dart';
+import 'package:chat_app/services/storage/storege_services.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class MyDrawer extends StatelessWidget {
   MyDrawer({super.key});
-  final authService = AuthService();
-  void logout() {
-    final authService = AuthService();
-    authService.signOut();
-  }
+  final _authService = AuthService();
+  final StoregeServices _storegeServices = StoregeServices();
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: Column(
         children: [
-          DrawerHeader(
-            child: Container(
-              width: double.infinity,
-              height: 40,
-              alignment: Alignment.center,
-              child: Text(
-                authService.getCurrentUser()!.email!,
-                style: const TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.w900,
-                    color: Color(0xFF553370)),
-              ),
-            ),
-          ),
           Expanded(
             child: Column(
               children: [
+                AspectRatio(
+                  aspectRatio: 1,
+                  child: FutureBuilder(
+                    future: _storegeServices
+                        .getProfilePic(_authService.getCurrentUser()!.uid),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError ||
+                          (!snapshot.hasData || snapshot.data == null)) {
+                        return Container(
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image:
+                                  AssetImage('assets/images/placeholder.jpg'),
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        );
+                      }
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      return Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: MemoryImage(snapshot.data!),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
                 ListTile(
                   leading: const MyIcon(icon: Icons.home),
                   title: const Text(
@@ -55,7 +71,12 @@ class MyDrawer extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProfileScreen()),
+                    );
+                  },
                 ),
                 ListTile(
                   leading: const MyIcon(icon: Icons.settings),
@@ -80,7 +101,7 @@ class MyDrawer extends StatelessWidget {
                 fontWeight: FontWeight.w400,
               ),
             ),
-            onTap: logout,
+            onTap: _authService.signOut,
           ),
           const SizedBox(
             height: 20,

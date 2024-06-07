@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class MyTextfield extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
-  const MyTextfield({super.key, required this.hintText, required this.controller});
+  final bool obscureText;
+  const MyTextfield(
+      {super.key, required this.hintText, required this.controller, required this.obscureText});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +19,7 @@ class MyTextfield extends StatelessWidget {
           label: Text(hintText),
           hintStyle: const TextStyle(
               fontWeight: FontWeight.w400, color: Colors.black38)),
+              obscureText: obscureText,
     );
   }
 }

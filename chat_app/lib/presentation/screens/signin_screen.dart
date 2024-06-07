@@ -3,12 +3,19 @@ import 'package:chat_app/presentation/widgets/my_button.dart';
 import 'package:chat_app/presentation/widgets/my_textfield.dart';
 import 'package:flutter/material.dart';
 
-class SignInScreen extends StatelessWidget {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _pwController = TextEditingController();
-
+class SignInScreen extends StatefulWidget {
   final void Function()? onTap;
   SignInScreen({super.key, this.onTap});
+
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
+  final TextEditingController _emailController = TextEditingController();
+
+  final TextEditingController _pwController = TextEditingController();
+  bool showPassword = false;
 
   void signIn() async {
     final authService = AuthService();
@@ -79,15 +86,29 @@ class SignInScreen extends StatelessWidget {
                             MyTextfield(
                               controller: _emailController,
                               hintText: "Email",
+                              obscureText: false,
                             ),
                             const SizedBox(
                               height: 20,
                             ),
                             const SizedBox(height: 10.0),
-                            MyTextfield(
-                              controller: _pwController,
-                              hintText: "Password",
-                            ),
+                            Row(children: [
+                              Expanded(
+                                child: MyTextfield(
+                                  hintText: 'Password',
+                                  controller: _pwController,
+                                  obscureText: showPassword,
+                                ),
+                              ),
+                              IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      showPassword = !showPassword;
+                                    });
+                                  },
+                                  icon:
+                                      const Icon(Icons.remove_red_eye_outlined))
+                            ]),
                             const SizedBox(
                               height: 10,
                             ),
@@ -135,7 +156,7 @@ class SignInScreen extends StatelessWidget {
                           ),
                         ),
                         GestureDetector(
-                          onTap: onTap,
+                          onTap: widget.onTap,
                           child: const Text(
                             "Sign Up Now",
                             style: TextStyle(

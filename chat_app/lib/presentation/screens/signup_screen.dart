@@ -3,15 +3,26 @@ import 'package:chat_app/presentation/widgets/my_button.dart';
 import 'package:chat_app/presentation/widgets/my_textfield.dart';
 import 'package:flutter/material.dart';
 
-class SignUpScreen extends StatelessWidget {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _pwController = TextEditingController();
-  final TextEditingController _confirmPwController = TextEditingController();
-  final auth = AuthService();
-
+class SignUpScreen extends StatefulWidget {
   final void Function()? onTap;
   SignUpScreen({super.key, this.onTap});
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final TextEditingController _nameController = TextEditingController();
+
+  final TextEditingController _emailController = TextEditingController();
+
+  final TextEditingController _pwController = TextEditingController();
+
+  final TextEditingController _confirmPwController = TextEditingController();
+  bool showPassword = false;
+  bool showConfirmPassword = false;
+
+  final auth = AuthService();
 
   void signUp(BuildContext context) {
     if (_nameController.text.isNotEmpty &&
@@ -103,6 +114,7 @@ class SignUpScreen extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.all(20),
                     child: Material(
+                      color: Colors.white,
                       elevation: 5.0,
                       borderRadius: BorderRadius.circular(
                         10,
@@ -118,6 +130,7 @@ class SignUpScreen extends StatelessWidget {
                             MyTextfield(
                               hintText: 'Name',
                               controller: _nameController,
+                              obscureText: false,
                             ),
                             const SizedBox(
                               height: 20,
@@ -125,21 +138,49 @@ class SignUpScreen extends StatelessWidget {
                             MyTextfield(
                               hintText: 'Email',
                               controller: _emailController,
+                              obscureText: false,                              
                             ),
                             const SizedBox(
                               height: 20,
                             ),
-                            MyTextfield(
-                              hintText: 'Password',
-                              controller: _pwController,
-                            ),
+                            Row(children: [
+                              Expanded(
+                                child: MyTextfield(
+                                  hintText: 'Password',
+                                  controller: _pwController,
+                                  obscureText: showPassword,
+                                ),
+                              ),
+                              IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      showPassword = !showPassword;
+                                    });
+                                  },
+                                  icon:
+                                      const Icon(Icons.remove_red_eye_outlined))
+                            ]),
                             const SizedBox(
                               height: 20,
                             ),
-                            MyTextfield(
-                              hintText: 'Confirm password',
-                              controller: _confirmPwController,
-                            ),
+                            Row(children: [
+                              Expanded(
+                                child: MyTextfield(
+                                  hintText: 'Confirm password',
+                                  controller: _confirmPwController,
+                                  obscureText: showConfirmPassword,
+                                ),
+                              ),
+                              IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      showConfirmPassword =
+                                          !showConfirmPassword;
+                                    });
+                                  },
+                                  icon:
+                                      const Icon(Icons.remove_red_eye_outlined))
+                            ]),
                             const SizedBox(
                               height: 30,
                             ),
@@ -171,7 +212,7 @@ class SignUpScreen extends StatelessWidget {
                           ),
                         ),
                         GestureDetector(
-                          onTap: onTap,
+                          onTap: widget.onTap,
                           child: const Text(
                             "Sign In Now",
                             style: TextStyle(

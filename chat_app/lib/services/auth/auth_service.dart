@@ -23,7 +23,7 @@ class AuthService {
     try {
       UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: password);
-          
+
       await userCredential.user?.updateDisplayName(name);
 
       _firebaseFirestore.collection("Users").doc(userCredential.user!.uid).set({
@@ -41,5 +41,9 @@ class AuthService {
 
   Future<void> signOut() async {
     await _auth.signOut();
+  }
+
+  Future<void> uploadProfilePic() async {
+    await _auth.currentUser!.updatePhotoURL("photoURL");
   }
 }
